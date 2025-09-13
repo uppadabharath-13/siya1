@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Finance Manager</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #89f7fe, #66a6ff);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+            margin-bottom: 25px;
+        }
+
+        form {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        form input, form button {
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        form input {
+            flex: 1;
+            background: #f0f0f0;
+        }
+
+        form button {
+            background: linear-gradient(135deg, #66a6ff, #89f7fe);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        form button:hover {
+            background: linear-gradient(135deg, #2575fc, #6a11cb);
+        }
+
+        ul#expenseList {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul#expenseList li {
+            background: #f9f9f9;
+            margin: 8px 0;
+            padding: 12px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            color: #444;
+        }
+
+        canvas {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        💰 Student Finance Manager
+    </header>
+
+    <div class="container">
+
+        <div class="card">
+            <h2>Add Expense</h2>
+            <form id="expenseForm">
+                <input type="date" id="date" required>
+                <input type="text" id="description" placeholder="Description" required>
+                <input type="number" id="amount" placeholder="Amount" required>
+                <button type="submit">➕ Add Expense</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>Expenses</h2>
+            <ul id="expenseList">
+                {% for expense in expenses %}
+                <li>
+                    <strong>{{expense.description}}</strong> - ₹{{expense.amount}} 
+                    <em>({{expense.category}})</em> on {{expense.date}}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Spending Forecast</h2>
+            <canvas id="forecastChart"></canvas>
+        </div>
+
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
